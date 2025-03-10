@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:11:33 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/10 02:25:04 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/10 04:03:56 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,57 @@
 
 void f() { system("leaks so_long"); }
 
-void draw_map(void *mlx, void *win, char **map, object *game)
+void draw_map(char **map, object *game)
 {
     int i;
     size_t j;
-    void *wall;
-    void *player;
-    void *floor;
-    void *coin;
-    void *exit;
-    int img_size = 40;
+    void *m;
+    void *w;
+    int s;
 
-    i = 0;
-    floor = mlx_xpm_file_to_image(mlx, "imageXPM/floor.xpm", &(game->width), &(game->height));
-    wall = mlx_xpm_file_to_image(mlx, "imageXPM/wall.xpm", &img_size, &img_size);
-    coin = mlx_xpm_file_to_image(mlx, "imageXPM/candy.xpm", &img_size, &img_size);
-    player = mlx_xpm_file_to_image(mlx, "imageXPM/player.xpm", &img_size, &img_size);
-    exit = mlx_xpm_file_to_image(mlx, "imageXPM/exit1.xpm", &img_size, &img_size);
-    while (map[i])
+    i = -1;
+    m = game->mlx;
+    w = game->win;
+    s = game->img_size;
+    while (++i < game->len_line)
     {
-        j = 0;
-        mlx_put_image_to_window(mlx, win, floor, j * img_size, i * img_size);
-        while (map[i][j] != '\n' && map[i][j] != '\0')
+        j = -1;
+        mlx_put_image_to_window(m, w, game->floor, s * j, s * i);
+        while (map[i][++j] != '\n' && map[i][j])
         {
-            if (map[i][j] == '1')
-                mlx_put_image_to_window(mlx, win, wall, j * img_size, i * img_size);
+            if (i == 0 || i == game->len_line - 1 || j == 0 || j == game->size_line - 1)
+                mlx_put_image_to_window(m, w, game->wall[1], j * s, i * s);
+            else if (map[i][j] == '1')
+                mlx_put_image_to_window(m, w, game->wall[0], j * s, i * s);
             if (map[i][j] == 'C')
-                mlx_put_image_to_window(mlx, win, coin, j * img_size, i * img_size);
+                mlx_put_image_to_window(m, w, game->candy, j * s, i * s);
             if (map[i][j] == 'P')
-                mlx_put_image_to_window(mlx, win, player, j * img_size, i * img_size);
+                mlx_put_image_to_window(m, w, game->choper, j * s, i * s);
             if (map[i][j] == 'E')
-                mlx_put_image_to_window(mlx, win, exit, j * img_size, i * img_size);
-            j++;
+                mlx_put_image_to_window(m, w, game->exit[1], j * s, i * s);
         }
-        i++;
     }
 }
 
+// void draw_wall(char **map, object *game)
+// {
+//     int i = 0;
+//     size_t j;
+//     while (i)
+//     {
+//         if (i = 0)
+//         {
+//             while ()
+//             {
+//                 /* code */
+//             }
+//         }
+            
+//         if (i == game->len_line - 1)
+//         j = 0;
+//         if (map[i])
+//     }
+// }
 int main(int ac, char **av)
 {
     object *game;
@@ -60,7 +74,6 @@ int main(int ac, char **av)
     game = (object *)malloc(sizeof(object));
     if (!game)
         return (0);
-    initialise_struct(game);
     if (ac != 2)
         ft_error("**the args are not 2.**", game);
     fd_map = check_arg_map(av[1], game);
@@ -70,30 +83,25 @@ int main(int ac, char **av)
     if (!game)
         return (free(game), 0);
     check_map(game);
-    // game->map_copy = copy_map(game);
-    // if (!game->map_copy)
-    //     return (free_game(game), 0);
-    // flood_fill(game, game->player_x, game->player_y);
-    // check_map_copy(game->map_copy);
-    // void *mlx;
-    // void *win;
-    // mlx = mlx_init();
-    // game->width = 40 * game->size_line;
-    // game->height = 40 * game->len_line;
-    // // ft_printf("%d", game->width);
-    // win = mlx_new_window(mlx, game->width, game->height, "SO LONG");
-    // draw_map(mlx, win, game->map, game);
-
-    // mlx_hook(win, 17, 0, close_window, NULL);
-    // mlx_loop(mlx);
-    // char **map = game->map_copy;
-    // while (*map)
-    // {
-    //     ft_printf("%s", *map);
-    //     map++;
-    // }
-    // free(*map);
-    // ft_printf("\n");
+    game->map_copy = copy_map(game);
+    if (!game->map_copy)
+        return (free_game(game), 0);
+    flood_fill(game, game->player_x, game->player_y);
+    check_map_copy(game->map_copy, game);
+    game->width = 40 * game->size_line;
+    game->height = 40 * game->len_line;
+    initialise_struct(game);
+    // draw_wall(game->map, game);
+    draw_map(game->map, game);
+    mlx_loop(game->mlx);
+    char **map = game->map_copy;
+    while (*map)
+    {
+        ft_printf("%s", *map);
+        map++;
+    }
+    free(*map);
+    ft_printf("\n");
     free_game(game);
     // atexit(f);
     return (0);

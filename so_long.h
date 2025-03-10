@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:03:03 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/10 02:10:29 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/10 03:11:05 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,20 @@ typedef struct map
     char **map_copy;
     int colectible;
     int old_colectible;
-    int exit;
     int old_exit;
     int player;
     int player_x;
     int player_y;
     int width;
     int height;
+    int img_size;
+    void *floor;
+    void *wall[2];
+    void *exit[2];
+    void *candy;
+    void *choper;
+    void *mlx;
+    void *win;
 } object;
 
 // win game
