@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:11:33 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 00:33:33 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/12 01:29:52 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int ac, char **av)
     }
     game = (object *)malloc(sizeof(object));
     if (!game)
-        return (0);
+        exit(1);
     fd_map = check_arg_map(av[1], game);
     if (fd_map < 0)
         return 0;
@@ -51,7 +51,7 @@ int main(int ac, char **av)
     game->height = 40 * game->len_line;
     initialise_struct(game);
     draw_map(game->map, game);
-    mlx_key_hook(game->win, key_hook, game);
+    mlx_hook(game->win, 2, 0, key_hook, game);
     mlx_hook(game->win, 17, 0, close_window, game);
     mlx_loop(game->mlx);
     free_game(game);

@@ -7,10 +7,7 @@ int check_arg_map(char *av, object *game)
 
     fd = open(av, O_RDONLY, 666);
     if (fd < 0)
-    {
         ft_error("**the file is not exist.**", game);
-        return (-1);
-    }
     len = ft_strlen(av);
     if (len < 4)
         return (-1);

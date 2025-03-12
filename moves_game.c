@@ -11,9 +11,9 @@ void draw_map(char **map, object *game)
     while (++i < game->len_line)
     {
         j = -1;
+        mlx_put_image_to_window(m, w, game->floor, s * j, s * i);
         while (map[i][++j] != '\n' && map[i][j])
         {
-            mlx_put_image_to_window(m, w, game->floor, s * j, s * i);
             if (i == 0 || i == game->len_line - 1 || j == 0 || j == game->size_line - 1)
                 mlx_put_image_to_window(m, w, game->wall[1], j * s, i * s);
             else if (map[i][j] == '1')

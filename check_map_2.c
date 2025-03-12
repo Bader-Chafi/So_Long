@@ -40,7 +40,7 @@ object *check_map(object *game)
         i++;
     }
     check_caracters(game);
-    if (game->len_line < 3 || game->size_line < 5)
+    if (game->len_line < 3 || game->size_line < 5 || game->len_line > 35)
         ft_puterror(game, "**the map is not valid lines.**");
     return (game);
 }

@@ -6,11 +6,11 @@
 #    By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 17:23:26 by bchafi            #+#    #+#              #
-#    Updated: 2025/03/11 21:29:30 by bchafi           ###   ########.fr        #
+#    Updated: 2025/03/12 02:16:07 by bchafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 U = utils
 
 SOURCES = \
