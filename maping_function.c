@@ -6,13 +6,13 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:54:40 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 06:03:02 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/12 08:30:49 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	*free_store(char *map, int i, char **s, object *t)
+char	*free_store(char *map, int i, char **s, t_obj *t)
 {
 	if (!map)
 	{
@@ -24,7 +24,7 @@ char	*free_store(char *map, int i, char **s, object *t)
 	return (map);
 }
 
-object	*get_map(int fd, object *g, char *fds)
+t_obj	*get_map(int fd, t_obj *g, char *fds)
 {
 	char	*map;
 	int		i;
@@ -51,7 +51,7 @@ object	*get_map(int fd, object *g, char *fds)
 	return (close(fd), g);
 }
 
-void	ft_puterror(object *this, char *s)
+void	ft_puterror(t_obj *this, char *s)
 {
 	int	i;
 
@@ -74,7 +74,7 @@ int	ft_strlenmap(const char *s)
 	return (i);
 }
 
-void	check_rectongle_map(object *this)
+void	check_rectongle_map(t_obj *this)
 {
 	int		i;
 	int		j;

@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 06:03:14 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/12 08:30:49 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ void	ft_error(char *s)
 	exit(1);
 }
 
-void	initialise_struct(object *game)
+void	initialise_struct(t_obj *game)
 {
 	int	s;
 
 	game->img_size = 40;
+	game->candyw = 0;
+	game->move = 0;
 	s = game->img_size;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->width, game->height,
@@ -38,7 +40,7 @@ void	initialise_struct(object *game)
 		ft_puterror(game, "Error Failed to load an image");
 }
 
-void	free_game(object *game)
+void	free_game(t_obj *game)
 {
 	char	**tmp;
 
@@ -63,20 +65,20 @@ void	free_game(object *game)
 	exit(1);
 }
 
-void	exit_game(object *game)
+void	exit_game(t_obj *game)
 {
 	free_game(game);
 	exit(EXIT_SUCCESS);
 }
 
-object	*ft_half_main(object *game, char **av, int fd_map, int ac)
+t_obj	*ft_half_main(t_obj *game, char **av, int fd_map, int ac)
 {
 	if (ac != 2)
 	{
 		ft_printf("**the args are not 2.**");
 		exit(1);
 	}
-	game = (object *)malloc(sizeof(object));
+	game = (t_obj *)malloc(sizeof(t_obj));
 	if (!game)
 		exit(1);
 	fd_map = check_arg_map(av[1]);
@@ -86,7 +88,6 @@ object	*ft_half_main(object *game, char **av, int fd_map, int ac)
 	if (!game)
 		return (free(game), NULL);
 	check_map(game);
-	find_exit(game);
 	game->map_copy = copy_map(game);
 	if (!game->map_copy)
 		return (free_game(game), NULL);
