@@ -1,58 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
+/*   Updated: 2025/03/12 06:03:14 by bchafi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void ft_error(char *s, object *game)
+void	ft_error(char *s)
 {
-    (void)game;
-    ft_printf("Error\n%s", s);
-    exit(1);
+	ft_printf("Error\n%s", s);
+	exit(1);
 }
 
-void initialise_struct(object *game)
+void	initialise_struct(object *game)
 {
-    int s;
-    game->img_size = 40;
+	int	s;
 
-    s = game->img_size;
-    game->mlx = mlx_init();
-    game->win = mlx_new_window(game->mlx, game->width, game->height, "SO LONG ** Take all Collect then exit from the door **");
-    game->floor = mlx_xpm_file_to_image(game->mlx, "imageXPM/floor1.xpm", &s, &s);
-    game->wall[0] = mlx_xpm_file_to_image(game->mlx, "imageXPM/wallP.xpm", &s, &s);
-    game->wall[1] = mlx_xpm_file_to_image(game->mlx, "imageXPM/wall.xpm", &s, &s);
-    game->candy = mlx_xpm_file_to_image(game->mlx, "imageXPM/candy.xpm", &s, &s);
-    game->choper = mlx_xpm_file_to_image(game->mlx, "imageXPM/player.xpm", &s, &s);
-    game->exit = mlx_xpm_file_to_image(game->mlx, "imageXPM/exit1.xpm", &s, &s);
-    if (!game->floor || !game->wall[0] || !game->wall[1] || !game->candy  || !game->choper || !game->exit)
-    {
-        ft_printf("Error: Failed to load an image\n");
-        exit(1);
-    }
+	game->img_size = 40;
+	s = game->img_size;
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, game->width, game->height,
+			"SO LONG ** Take all Collect then exit from the door **");
+	game->floor = mlx_xpm_file_to_image(game->mlx, "XPM/back.xpm", &s, &s);
+	game->wall[0] = mlx_xpm_file_to_image(game->mlx, "XPM/wallP.xpm", &s, &s);
+	game->wall[1] = mlx_xpm_file_to_image(game->mlx, "XPM/wall.xpm", &s, &s);
+	game->candy = mlx_xpm_file_to_image(game->mlx, "XPM/candy.xpm", &s, &s);
+	game->choper = mlx_xpm_file_to_image(game->mlx, "XPM/player.xpm", &s, &s);
+	game->exit = mlx_xpm_file_to_image(game->mlx, "XPM/exit1.xpm", &s, &s);
+	if (!game->floor || !game->wall[0] || !game->wall[1] || !game->candy
+		|| !game->choper || !game->exit)
+		ft_puterror(game, "Error Failed to load an image");
 }
 
-void free_game(object *game)
+void	free_game(object *game)
 {
-    char **tmp;
-    int i = 2;
+	char	**tmp;
 
-    tmp = game->map;
-    while (i > 1)
-    {
-        while (*tmp)
-        {
-            free(*tmp);
-            tmp++;
-        }
-        free(game->map);
-        i--;
-    }
-    if (game->map_copy)
-    {
-        tmp = game->map_copy;
-        while (*tmp)
-        {
-            free(*tmp);
-            tmp++;
-        }
-        free(game->map_copy);
-    }
-    free(game);
+	tmp = game->map;
+	while (*tmp)
+	{
+		free(*tmp);
+		tmp++;
+	}
+	free(game->map);
+	if (game->map_copy)
+	{
+		tmp = game->map_copy;
+		while (*tmp)
+		{
+			free(*tmp);
+			tmp++;
+		}
+		free(game->map_copy);
+	}
+	free(game);
+	exit(1);
+}
+
+void	exit_game(object *game)
+{
+	free_game(game);
+	exit(EXIT_SUCCESS);
+}
+
+object	*ft_half_main(object *game, char **av, int fd_map, int ac)
+{
+	if (ac != 2)
+	{
+		ft_printf("**the args are not 2.**");
+		exit(1);
+	}
+	game = (object *)malloc(sizeof(object));
+	if (!game)
+		exit(1);
+	fd_map = check_arg_map(av[1]);
+	if (fd_map < 0)
+		return (NULL);
+	game = get_map(fd_map, game, av[1]);
+	if (!game)
+		return (free(game), NULL);
+	check_map(game);
+	find_exit(game);
+	game->map_copy = copy_map(game);
+	if (!game->map_copy)
+		return (free_game(game), NULL);
+	flood_fill(game, game->player_x, game->player_y);
+	check_map_copy(game->map_copy);
+	return (game);
 }

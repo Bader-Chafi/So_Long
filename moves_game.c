@@ -1,4 +1,5 @@
 #include "so_long.h"
+
 void draw_map(char **map, object *game)
 {
     int i;
@@ -11,9 +12,9 @@ void draw_map(char **map, object *game)
     while (++i < game->len_line)
     {
         j = -1;
-        mlx_put_image_to_window(m, w, game->floor, s * j, s * i);
         while (map[i][++j] != '\n' && map[i][j])
         {
+            mlx_put_image_to_window(m, w, game->floor, j * s, i * s);
             if (i == 0 || i == game->len_line - 1 || j == 0 || j == game->size_line - 1)
                 mlx_put_image_to_window(m, w, game->wall[1], j * s, i * s);
             else if (map[i][j] == '1')
@@ -28,7 +29,7 @@ void draw_map(char **map, object *game)
     }
 }
 
-void find_old_exit(object *game)
+void find_exit(object *game)
 {
     int i;
     int j;
@@ -80,7 +81,9 @@ void win_game(int *candy, object *game)
     if (*candy == game->o_coin)
     {
         game->map[game->exit_x][game->exit_y] = 'E';
-        game->exit = mlx_xpm_file_to_image(game->mlx, "imageXPM/exit2.xpm", &game->img_size, &game->img_size);
+        game->exit = mlx_xpm_file_to_image(game->mlx, "XPM/exit2.xpm", &game->img_size, &game->img_size);
+        if (!game->exit)
+            ft_error("error in the load of the image");
     }
     draw_map(game->map, game);
 }

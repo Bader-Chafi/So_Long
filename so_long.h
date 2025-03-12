@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:03:03 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 00:24:07 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/12 05:51:16 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,10 @@ int ft_hexa_address(unsigned long num);
 #define BUFFER_SIZE 10
 #endif
 
-// Define the keycodes for movement (WASD and Arrow Keys)
-// #define KEY_W 13    // W - Move up
-// #define KEY_A 0     // A - Move left
-// #define KEY_S 1     // S - Move down
-// #define KEY_D 2     // D - Move right
-// #define KEY_UP 65362    // Arrow Up
-// #define KEY_LEFT 65361  // Arrow Left
-// #define KEY_DOWN 65364  // Arrow Down
-// #define KEY_RIGHT 65363 // Arrow Right
-#define KEY_UP 126    // Up Arrow on macOS
-#define KEY_LEFT 123  // Left Arrow on macOS
-#define KEY_DOWN 125  // Down Arrow on macOS
-#define KEY_RIGHT 124 // Right Arrow on macOS
+#define KEY_UP 126
+#define KEY_LEFT 123
+#define KEY_DOWN 125
+#define KEY_RIGHT 124
 
 char *get_next_line(int fd);
 size_t ft_strlen(const char *s);
@@ -78,41 +69,28 @@ typedef struct map
     void *win;
 } object;
 
-// win game
-int close_window(void *pa);
-
-// helpers
-void ft_error(char *s, object *game);
+int close_window();
+object *ft_half_main(object *game, char **av, int fd_map, int ac);
+void ft_error(char *s);
 void initialise_struct(object *game);
 void free_game(object *game);
-
-// parcing
-void initialise_struct(object *game);
-int  check_arg_map(char *av, object *game);
+void exit_game(object *game);
+int check_arg_map(char *av);
 char **copy_map(object *game);
 void flood_fill(object *game, int x, int y);
-
-// check map 2
 object *check_map(object *game);
 void check_caracters(object *game);
-void check_map_copy(char **c_map, object *game);
-
-// map_func
+void check_map_copy(char **c_map);
 object *get_map(int fd, object *game, char *fds);
 void ft_puterror(object *this, char *s);
 int ft_strlenmap(const char *s);
 void check_rectongle_map(object *this);
 char *free_store(char *map, int i, char **s, object *t);
-
-// int key_hook(int keycode, object *game);
 void draw_map(char **map, object *game);
 void move_player(int *move, object *game, int *candy, int dx, int dy);
 void win_game(int *candy, object *game);
 int key_hook(int keycode, object *game);
-void find_old_exit(object *game);
-
+void find_exit(object *game);
 void exit_game(object *game);
-void find_old_exit(object *game);
-
 
 #endif

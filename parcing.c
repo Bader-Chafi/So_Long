@@ -1,18 +1,18 @@
 #include "so_long.h"
 
-int check_arg_map(char *av, object *game)
+int check_arg_map(char *av)
 {
     int len;
     int fd;
 
     fd = open(av, O_RDONLY, 666);
     if (fd < 0)
-        ft_error("**the file is not exist.**", game);
+        ft_error("**the file is not exist.**");
     len = ft_strlen(av);
     if (len < 4)
-        return (-1);
+        return(-1);
     if (ft_strcmp(av + len - 4, ".ber"))
-        ft_error("**the file is not final with .ber.**", game);
+        ft_error("**the file is not final with .ber.**");
     return (fd);
 }
 
