@@ -75,7 +75,7 @@ To get started with **So Long**, follow these easy steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone [https://github.com/yourusername/so_long.git](https://github.com/Bader-Chafi/So_Long.git)
+   git clone https://github.com/Bader-Chafi/So_Long.git
    cd so_long
    ```
 
