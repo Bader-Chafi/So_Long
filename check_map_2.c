@@ -5,27 +5,25 @@ void check_caracters(object *game)
     int i;
     int j;
 
-    i = 0;
-    game->old_colectible = 0;
-    while (game->map[i])
+    (1) && (i = -1, game->o_coin = 0, game->o_exit = 0, game->player = 0);
+    while (game->map[++i])
     {
-        j = 0;
-        while (game->map[i][j] != '\n' && game->map[i][j])
+        j = -1;
+        while (game->map[i][++j] != '\n' && game->map[i][j])
         {
             if (game->map[i][j] != '1' && game->map[i][j] != '0' && game->map[i][j] != 'C' && game->map[i][j] != 'P' && game->map[i][j] != 'E')
                 ft_puterror(game, "the map must has : 0 1 C P E");
             if (game->map[i][j] == 'P')
-                (1) && (game->player_x = i, game->player_y = j, game->player++);
+                (1) && (game->player_x = i, game->player_y = j, game->player +=1);
             if (game->map[i][j] == 'C')
-                game->old_colectible += 1;
+                game->o_coin += 1;
             if (game->map[i][j] == 'E')
-                game->old_exit += 1;
-            j++;
+                game->o_exit += 1;
         }
-        i++;
+        game->size_line = j;
     }
-    if (game->player > 1 || game->old_exit > 1)
-        ft_puterror(game, "**You Must Have 1 for player & exit**");
+    if (game->player != 1 || game->o_exit != 1 || game->o_coin < 1)
+        ft_puterror(game, "**You Must have 1Player/1Exit more 1Coin**");
 }
 
 object *check_map(object *game)
@@ -42,6 +40,8 @@ object *check_map(object *game)
         i++;
     }
     check_caracters(game);
+    if (game->len_line < 3 || game->size_line < 5)
+        ft_puterror(game, "**the map is not valid lines.**");
     return (game);
 }
 

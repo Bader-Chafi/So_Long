@@ -11,15 +11,16 @@ void initialise_struct(object *game)
 {
     int s;
     game->img_size = 40;
+
     s = game->img_size;
     game->mlx = mlx_init();
-    game->win = mlx_new_window(game->mlx, game->width, game->height, "SO LONG");
-    game->floor = mlx_xpm_file_to_image(game->mlx, "imageXPM/floor.xpm", &(game->width), &(game->height));
+    game->win = mlx_new_window(game->mlx, game->width, game->height, "SO LONG ** Take all Collect then old_exit from the door **");
+    game->floor = mlx_xpm_file_to_image(game->mlx, "imageXPM/floor1.xpm", &s, &s);
     game->wall[0] = mlx_xpm_file_to_image(game->mlx, "imageXPM/wallP.xpm", &s, &s);
     game->wall[1] = mlx_xpm_file_to_image(game->mlx, "imageXPM/wall.xpm", &s, &s);
     game->candy = mlx_xpm_file_to_image(game->mlx, "imageXPM/candy.xpm", &s, &s);
     game->choper = mlx_xpm_file_to_image(game->mlx, "imageXPM/player.xpm", &s, &s);
-    game->exit[1] = mlx_xpm_file_to_image(game->mlx, "imageXPM/exit1.xpm", &s, &s);
+    game->exit = mlx_xpm_file_to_image(game->mlx, "imageXPM/exit1.xpm", &s, &s);
 }
 
 void free_game(object *game)

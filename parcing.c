@@ -39,6 +39,8 @@ char **copy_map(object *game)
 
 void flood_fill(object *game, int x, int y)
 {
+    if (x < 0 || y < 0 || x >= game->len_line || y >= game->size_line)
+        return;
     if (game->map_copy[x][y] == '1' || game->map_copy[x][y] == 'V')
         return;
     game->map_copy[x][y] = 'V';
@@ -46,5 +48,10 @@ void flood_fill(object *game, int x, int y)
     flood_fill(game, x - 1, y);
     flood_fill(game, x, y + 1);
     flood_fill(game, x, y - 1);
+    if (game->len_line < 3)
+    {
+        exit(1);
+        return ;
+    }
 }
 

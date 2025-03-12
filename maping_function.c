@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:54:40 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/10 02:22:52 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/11 22:32:57 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,10 @@ object *get_map(int fd, object *game, char *fds)
     {
         ft_printf("Error\n** the map is empty **");
         exit(1);
-        return NULL;
     }
     while (map)
     {
-        free(map);
-        i++;
+        (1) && (free(map), i++);
         map = get_next_line(fd);
     }
     store_map = (char **)malloc(sizeof(char *) * (i + 1));
@@ -80,9 +78,9 @@ void ft_puterror(object *this, char *s)
     exit(EXIT_FAILURE);
 }
 
-size_t ft_strlenmap(const char *s)
+int ft_strlenmap(const char *s)
 {
-    size_t i;
+    int i;
 
     i = 0;
     while (s[i] != '\0' && s[i] != '\n')
