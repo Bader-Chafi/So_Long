@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 08:30:49 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/13 03:05:25 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	free_game(t_obj *game)
 		free(game->map_copy);
 	}
 	free(game);
-	exit(1);
 }
 
 void	exit_game(t_obj *game)
