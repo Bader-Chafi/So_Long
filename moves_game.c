@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/13 03:05:09 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:04:26 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	draw_map_2(char **map, int i, int j, t_obj *game)
 		mlx_put_image_to_window(m, w, game->wall[0], j * s, i * s);
 	if (map[i][j] == 'C')
 		mlx_put_image_to_window(m, w, game->candy, j * s, i * s);
-	else if (map[i][j] == 'P')
-		mlx_put_image_to_window(m, w, game->choper, j * s, i * s);
+	else if (map[i][j] == 'P' && game->flag == 0)
+		mlx_put_image_to_window(m, w, game->choper[0], j * s, i * s);
+	else if (map[i][j] == 'P' && game->flag == 1)
+		mlx_put_image_to_window(m, w, game->choper[1], j * s, i * s);
 	else if (map[i][j] == 'E')
 		mlx_put_image_to_window(m, w, game->exit, j * s, i * s);
 }
@@ -97,11 +99,17 @@ int	key_hook(int keycode, t_obj *game)
 	if (keycode == KEY_UP)
 		move_player(game, -1, 0);
 	else if (keycode == KEY_LEFT)
+	{
+		game->flag = 0;
 		move_player(game, 0, -1);
+	}
 	else if (keycode == KEY_DOWN)
 		move_player(game, 1, 0);
 	else if (keycode == KEY_RIGHT)
+	{
+		game->flag = 1;
 		move_player(game, 0, 1);
+	}
 	else if (keycode == KEY_ESC)
 	{
 		ft_printf("You pressed ESC\n");

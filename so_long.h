@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:03:03 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 21:01:48 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 20:59:45 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ typedef struct map
 	int		height;
 	int		img_size;
 	void	*floor;
+	int		flag;
 	void	*wall[2];
 	void	*exit;
 	void	*candy;
-	void	*choper;
+	void	*choper[2];
 	void	*mlx;
 	void	*win;
 	int		candyw;
