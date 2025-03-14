@@ -6,11 +6,11 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:09:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 04:26:10 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:11:12 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../Mandatory/so_long.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

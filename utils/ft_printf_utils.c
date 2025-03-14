@@ -6,11 +6,11 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 00:09:39 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 04:24:06 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:11:03 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../Mandatory/so_long.h"
 
 int	ft_putchr(int c)
 {

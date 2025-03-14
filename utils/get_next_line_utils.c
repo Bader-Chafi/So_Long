@@ -6,11 +6,11 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:43:55 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/05 11:01:17 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:11:15 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../Mandatory/so_long.h"
 
 size_t	ft_strlen(const char *s)
 {

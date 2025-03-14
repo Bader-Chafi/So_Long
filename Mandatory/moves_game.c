@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/14 21:04:26 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 22:15:59 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	win_game(t_obj *game)
 	{
 		game->map[game->exit_x][game->exit_y] = 'E';
 		game->exit = mlx_xpm_file_to_image(game->mlx,
-				"XPM/exit2.xpm", &game->img_size, &game->img_size);
+				"Mandatory/XPM/exit2.xpm", &game->img_size, &game->img_size);
 		if (!game->exit)
 			ft_error("error in the load of the image");
 	}
@@ -112,7 +112,7 @@ int	key_hook(int keycode, t_obj *game)
 	}
 	else if (keycode == KEY_ESC)
 	{
-		ft_printf("You pressed ESC\n");
+		ft_printf("You Pressed ESC To Exit Game\n");
 		exit_game(game);
 	}
 	win_game(game);

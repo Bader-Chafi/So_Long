@@ -6,11 +6,11 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:44:04 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/04 00:29:52 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 21:11:18 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../Mandatory/so_long.h"
 
 static char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
