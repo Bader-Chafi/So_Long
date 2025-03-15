@@ -6,7 +6,7 @@
 #    By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/10 17:23:26 by bchafi            #+#    #+#              #
-#    Updated: 2025/03/13 02:58:36 by bchafi           ###   ########.fr        #
+#    Updated: 2025/03/14 22:46:25 by bchafi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 SOURCES = \
 	so_long.c \
+	utils/ft_itoi.c \
 	helpers.c \
 	parcing.c \
 	moves_game.c \

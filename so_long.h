@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:03:03 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/12 21:01:48 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/14 23:53:14 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,37 @@ char	*ft_strcat(char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
 
-typedef struct map
-{
-	int		len_line;
-	int		size_line;
-	char	**map;
-	char	**map_copy;
-	int		o_coin;
-	int		o_exit;
-	int		exit_y;
-	int		exit_x;
-	int		player;
-	int		player_x;
-	int		player_y;
-	int		width;
-	int		height;
-	int		img_size;
-	void	*floor;
-	void	*wall[2];
-	void	*exit;
-	void	*candy;
-	void	*choper;
-	void	*mlx;
-	void	*win;
-	int		candyw;
-	int		move;
-}	t_obj;
+	typedef struct map
+	{
+		int		len_line;
+		int		size_line;
+		char	**map;
+		char	**map_copy;
+		int		o_coin;
+		int		o_exit;
+		int		exit_y;
+		int		exit_x;
+		int		player;
+		int		player_x;
+		int		player_y;
+		int		width;
+		int		height;
+		int		img_size;
+		void	*floor;
+		void	*wall[2];
+		void	*exit[4];
+		void	*candy;
+		// void	*enemy;
+		void	*choperl[5];
+		void	*choperr[5];
+		int		flag;
+		int		frame;
+		int		framee;
+		void	*mlx;
+		void	*win;
+		int		candyw;
+		int 	move;
+	}	t_obj;
 
 t_obj	*check_map(t_obj *game);
 t_obj	*ft_half_main(t_obj *game, char **av, int fd_map, int ac);
@@ -79,6 +84,7 @@ void	check_map_copy(char **c_map);
 int		close_window(void);
 void	ft_error(char *s);
 void	initialise_struct(t_obj *game);
+int		animate_player(t_obj *game);
 void	free_game(t_obj *game);
 void	exit_game(t_obj *game);
 char	*free_store(char *map, int i, char **s, t_obj *t);
@@ -88,10 +94,12 @@ void	check_rectongle_map(t_obj *this);
 void	draw_map_2(char **map, int i, int j, t_obj *game);
 void	draw_map(char **map, t_obj *game);
 void	move_player(t_obj *game, int dx, int dy);
-void	win_game(t_obj *game);
 int		key_hook(int keycode, t_obj *game);
 int		check_arg_map(char *av);
 char	**copy_map(t_obj *game);
 void	flood_fill(t_obj *game, int x, int y);
+int		anime(t_obj	*game);
+int		animate_exit(t_obj *game);
+char	*ft_itoa(int nbr);
 
 #endif

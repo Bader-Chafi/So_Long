@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/13 03:51:40 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/15 00:09:18 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,49 @@ void	ft_error(char *s)
 	exit(1);
 }
 
-void	initialise_struct(t_obj *game)
+void img_play_exit(t_obj *game)
 {
-	int	s;
+	int s; // Declare a temporary variable for size
 
-	game->img_size = 40;
-	game->candyw = 0;
-	game->move = 0;
-	s = game->img_size;
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->width, game->height,
-			"SO LONG ** Take all Collect then exit from the door **");
-	game->floor = mlx_xpm_file_to_image(game->mlx, "XPM/back.xpm", &s, &s);
-	game->wall[0] = mlx_xpm_file_to_image(game->mlx, "XPM/wallBP.xpm", &s, &s);
-	game->wall[1] = mlx_xpm_file_to_image(game->mlx, "XPM/walll.xpm", &s, &s);
-	game->candy = mlx_xpm_file_to_image(game->mlx, "XPM/candy.xpm", &s, &s);
-	game->choper = mlx_xpm_file_to_image(game->mlx, "XPM/player.xpm", &s, &s);
-	game->exit = mlx_xpm_file_to_image(game->mlx, "XPM/exit1.xpm", &s, &s);
-	if (!game->floor || !game->wall[0] || !game->wall[1] || !game->candy
-		|| !game->choper || !game->exit)
-		ft_puterror(game, "Error Failed to load an image");
+	game->choperl[0] = mlx_xpm_file_to_image(game->mlx, "XPM/pl1.xpm", &s, &s);
+	game->choperl[1] = mlx_xpm_file_to_image(game->mlx, "XPM/pl2.xpm", &s, &s);
+	game->choperl[2] = mlx_xpm_file_to_image(game->mlx, "XPM/pl3.xpm", &s, &s);
+	game->choperl[3] = mlx_xpm_file_to_image(game->mlx, "XPM/pl4.xpm", &s, &s);
+	game->choperl[4] = mlx_xpm_file_to_image(game->mlx, "XPM/pl5.xpm", &s, &s);
+	game->choperr[0] = mlx_xpm_file_to_image(game->mlx, "XPM/pr1.xpm", &s, &s);
+	game->choperr[1] = mlx_xpm_file_to_image(game->mlx, "XPM/pr2.xpm", &s, &s);
+	game->choperr[2] = mlx_xpm_file_to_image(game->mlx, "XPM/pr3.xpm", &s, &s);
+	game->choperr[3] = mlx_xpm_file_to_image(game->mlx, "XPM/pr4.xpm", &s, &s);
+	game->choperr[4] = mlx_xpm_file_to_image(game->mlx, "XPM/pr5.xpm", &s, &s);
+	game->exit[0] = mlx_xpm_file_to_image(game->mlx, "XPM/d1.xpm", &s, &s);
+	game->exit[1] = mlx_xpm_file_to_image(game->mlx, "XPM/d2.xpm", &s, &s);
+	game->exit[2] = mlx_xpm_file_to_image(game->mlx, "XPM/d3.xpm", &s, &s);
+	game->exit[3] = mlx_xpm_file_to_image(game->mlx, "XPM/d4.xpm", &s, &s);
 }
+
+void initialise_struct(t_obj *game)
+{
+    int s;
+
+    game->img_size = 50;
+    game->candyw = 0;
+    game->move = 0;
+    game->flag = 1;
+    s = game->img_size;
+    game->mlx = mlx_init();
+    game->win = mlx_new_window(game->mlx, game->width, game->height,
+            "SO LONG ** Take all Collect then exit from the door **");
+    game->floor = mlx_xpm_file_to_image(game->mlx, "XPM/back.xpm", &s, &s);
+    img_play_exit(game);
+    game->wall[0] = mlx_xpm_file_to_image(game->mlx, "XPM/wallBP.xpm", &s, &s);
+    game->wall[1] = mlx_xpm_file_to_image(game->mlx, "XPM/wall.xpm", &s, &s);
+    game->candy = mlx_xpm_file_to_image(game->mlx, "XPM/meatB.xpm", &s, &s);
+    game->frame = 0;
+    game->framee = 0;
+    if (!game->floor || !game->wall[0] || !game->wall[1] || !game->candy)
+        ft_puterror(game, "Error: Failed to load an image");
+}
+
 
 void	free_game(t_obj *game)
 {

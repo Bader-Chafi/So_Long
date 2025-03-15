@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/13 03:05:09 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/15 02:09:58 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ void	draw_map_2(char **map, int i, int j, t_obj *game)
 		mlx_put_image_to_window(m, w, game->wall[0], j * s, i * s);
 	if (map[i][j] == 'C')
 		mlx_put_image_to_window(m, w, game->candy, j * s, i * s);
-	else if (map[i][j] == 'P')
-		mlx_put_image_to_window(m, w, game->choper, j * s, i * s);
+	else if (map[i][j] == 'P' && game->flag == 0)
+		mlx_put_image_to_window(m, w, game->choperl[game->frame], j * s, i * s);
+	else if (map[i][j] == 'P' && game->flag == 1)
+		mlx_put_image_to_window(m, w, game->choperr[game->frame], j * s, i * s);
 	else if (map[i][j] == 'E')
-		mlx_put_image_to_window(m, w, game->exit, j * s, i * s);
+		mlx_put_image_to_window(m, w, game->exit[game->framee], j * s, i * s);
 }
 
 void	draw_map(char **map, t_obj *game)
@@ -42,6 +44,9 @@ void	draw_map(char **map, t_obj *game)
 	i = -1;
 	while (++i < game->len_line)
 	{
+		char *move_count = ft_itoa(game->move);
+		mlx_string_put(game->mlx, game->win, 20, 20, 0xFFFFFF, move_count);
+		free(move_count);
 		j = 0;
 		while (map[i][j] != '\n' && map[i][j])
 		{
@@ -51,45 +56,51 @@ void	draw_map(char **map, t_obj *game)
 	}
 }
 
-void	move_player(t_obj *game, int dx, int dy)
+void move_player(t_obj *game, int dx, int dy)
 {
-	t_obj	*r;
-	int		new_x;
-	int		new_y;
+    int  new_x;
+    int  new_y;
 
-	r = game;
-	new_x = r->player_x + dx;
-	new_y = r->player_y + dy;
-	if (r->map[new_x][new_y] != '1' && r->map[new_x][new_y] != 'E')
-	{
-		if (r->map[new_x][new_y] == 'C')
-			game->candyw++;
-		r->map[r->player_x][r->player_y] = '0';
-		r->player_x = new_x;
-		r->player_y = new_y;
-		r->map[new_x][new_y] = 'P';
-		ft_printf("Move: %d\n", ++game->move);
-	}
-	else if (r->map[new_x][new_y] == 'E' && game->candyw == r->o_coin)
-	{
-		r->map[r->player_x][r->player_y] = '0';
-		ft_printf("Move: %d\n", ++game->move);
-		ft_printf("You win!\n");
-		exit_game(r);
-	}
+    new_x = game->player_x + dx;
+    new_y = game->player_y + dy;
+    if (game->map[new_x][new_y] != '1' && game->map[new_x][new_y] != 'E')
+    {
+        if (game->map[new_x][new_y] == 'C')
+            game->candyw++;
+        game->map[game->player_x][game->player_y] = '0';
+        game->player_x = new_x;
+        game->player_y = new_y;
+        game->map[new_x][new_y] = 'P';
+		game->move++;
+        draw_map(game->map, game);
+    }
+    else if (game->map[new_x][new_y] == 'E' && game->candyw == game->o_coin)
+    {
+        game->map[game->player_x][game->player_y] = '0';
+        draw_map(game->map, game);
+        ft_printf("You win!\n");
+		game->move++;
+        exit_game(game);
+    }
 }
 
-void	win_game(t_obj *game)
+
+
+int animate_exit(t_obj *game)
 {
-	if (game->candyw == game->o_coin)
-	{
-		game->map[game->exit_x][game->exit_y] = 'E';
-		game->exit = mlx_xpm_file_to_image(game->mlx,
-				"XPM/exit2.xpm", &game->img_size, &game->img_size);
-		if (!game->exit)
-			ft_error("error in the load of the image");
-	}
-	draw_map(game->map, game);
+    static int frame_counter = 0;
+    static int frame_index = 0;
+
+    if (frame_index >= 4)
+        return (0);
+    if (frame_counter++ > 10)
+    {
+        game->framee = frame_index;
+        frame_index++;
+        frame_counter = 0;
+        draw_map(game->map, game);
+    }
+    return (0);
 }
 
 int	key_hook(int keycode, t_obj *game)
@@ -97,16 +108,22 @@ int	key_hook(int keycode, t_obj *game)
 	if (keycode == KEY_UP)
 		move_player(game, -1, 0);
 	else if (keycode == KEY_LEFT)
+	{
+		game->flag = 0;
 		move_player(game, 0, -1);
+	}
 	else if (keycode == KEY_DOWN)
 		move_player(game, 1, 0);
 	else if (keycode == KEY_RIGHT)
+	{
+		game->flag = 1;
 		move_player(game, 0, 1);
+	}
 	else if (keycode == KEY_ESC)
 	{
 		ft_printf("You pressed ESC\n");
 		exit_game(game);
 	}
-	win_game(game);
+	anime(game);
 	return (0);
 }
