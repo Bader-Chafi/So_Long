@@ -3,24 +3,24 @@ NAME = so_long
 CFLAGS = -Wall -Wextra -Werror
 
 SOURCES = \
-	Mandatory/so_long.c \
-	Mandatory/helpers.c \
-	Mandatory/parcing.c \
-	Mandatory/moves_game.c \
-	Mandatory/check_map_2.c \
-	Mandatory/maping_function.c \
+	M/so_long.c \
+	M/helpers.c \
+	M/parcing.c \
+	M/moves_game.c \
+	M/check_map_2.c \
+	M/maping_function.c \
 	utils/ft_printf.c \
 	utils/get_next_line.c \
 	utils/ft_printf_utils.c \
 	utils/get_next_line_utils.c
 
 SOURCES_B = \
-	bonus/so_long_bonus.c \
-	bonus/helpers_bonus.c \
-	bonus/parcing_bonus.c \
-	bonus/moves_game_bonus.c \
-	bonus/check_map_2_bonus.c \
-	bonus/maping_function_bonus.c \
+	B/so_long_bonus.c \
+	B/helpers_bonus.c \
+	B/parcing_bonus.c \
+	B/moves_game_bonus.c \
+	B/check_map_2_bonus.c \
+	B/maping_function_bonus.c \
 	utils/ft_printf.c \
 	utils/ft_itoi.c \
 	utils/get_next_line.c \

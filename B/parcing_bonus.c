@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 08:00:23 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 04:48:08 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 21:20:17 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	flood_fill_bonus(t_obj_b *game, int x, int y)
 {
 	if (x < 0 || y < 0 || x >= game->len_line || y >= game->size_line)
 		return ;
-	if (game->map_copy[x][y] == '1' || game->map_copy[x][y] == 'V' || game->map_copy[x][y] == 'M')
+	if (game->map_copy[x][y] == '1' || game->map_copy[x][y] == 'V'
+		|| game->map_copy[x][y] == 'M')
 		return ;
 	game->map_copy[x][y] = 'V';
 	flood_fill_bonus(game, x + 1, y);
@@ -62,4 +63,27 @@ void	flood_fill_bonus(t_obj_b *game, int x, int y)
 		exit(1);
 		return ;
 	}
+}
+
+void	exit_game_bonus(t_obj_b *game)
+{
+	free_game_bonus(game);
+	exit(EXIT_SUCCESS);
+}
+
+int	animate_exit_bonus(t_obj_b *game)
+{
+	static int	frame_counter;
+	static int	frame_index;
+
+	if (frame_index >= 4)
+		return (0);
+	if (frame_counter++ > 10)
+	{
+		game->framee = frame_index;
+		frame_index++;
+		frame_counter = 0;
+		draw_map_bonus(game->map, game);
+	}
+	return (0);
 }

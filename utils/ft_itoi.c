@@ -6,11 +6,11 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 22:28:25 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 03:49:21 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 06:17:04 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../bonus/so_long_bonus.h"
+#include "../B/so_long_bonus.h"
 
 static int	get_len(int nbr)
 {

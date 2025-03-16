@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/15 21:55:16 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 08:48:42 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	win_game(t_obj *game)
 	{
 		game->map[game->exit_x][game->exit_y] = 'E';
 		game->exit = mlx_xpm_file_to_image(game->mlx,
-				"Mandatory/XPM/exit2.xpm", &game->img_size, &game->img_size);
+				"M/XPM/exit2.xpm", &game->img_size, &game->img_size);
 		if (!game->exit)
 			ft_error("error in the load of the image");
 	}
@@ -96,16 +96,16 @@ void	win_game(t_obj *game)
 
 int	key_hook(int keycode, t_obj *game)
 {
-	if (keycode == KEY_UP)
+	if (keycode == KEY_UP || keycode == KEY_W)
 		move_player(game, -1, 0);
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT || keycode == KEY_A)
 	{
 		game->flag = 0;
 		move_player(game, 0, -1);
 	}
-	else if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN || keycode == KEY_S)
 		move_player(game, 1, 0);
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT || keycode == KEY_D)
 	{
 		game->flag = 1;
 		move_player(game, 0, 1);

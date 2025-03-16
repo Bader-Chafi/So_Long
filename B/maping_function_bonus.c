@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:54:40 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 04:47:50 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 08:47:27 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	check_rectongle_map_bonus(t_obj_b *this)
 		if (this->size_line != ft_strlenmap_bonus(map[i]))
 			ft_puterror_bonus(this, "**the map not rectogler.**");
 		if (map[i][0] != '1')
-			ft_puterror_bonus(this, "**the map is not cyrcel by the wall [0].**");
+			ft_puterror_bonus(this,
+				"**the map is not cyrcel by the wall [0].**");
 		i++;
 	}
 	i--;

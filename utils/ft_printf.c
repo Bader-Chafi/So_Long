@@ -6,12 +6,12 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 14:09:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 04:44:25 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 06:18:39 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Mandatory/so_long.h"
-#include "../bonus/so_long_bonus.h"
+#include "../M/so_long.h"
+#include "../B/so_long_bonus.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

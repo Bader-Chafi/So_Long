@@ -6,15 +6,15 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:11:33 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 04:49:08 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 21:27:46 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int animate_player_bonus(t_obj_b *game)
+int	animate_player_bonus(t_obj_b *game)
 {
-	static int counter = 0;
+	static int	counter;
 
 	if (counter++ >= 10)
 	{
@@ -25,7 +25,7 @@ int animate_player_bonus(t_obj_b *game)
 	return (0);
 }
 
-int anime_bonus(t_obj_b *game)
+int	anime_bonus(t_obj_b *game)
 {
 	animate_player_bonus(game);
 	if (game->candyw == game->o_coin)
@@ -35,24 +35,30 @@ int anime_bonus(t_obj_b *game)
 	}
 	enemy_bonus(game);
 	draw_map_bonus(game->map, game);
-	return 1;
+	return (1);
 }
-#include <sys/time.h>
 
-void move_enemy_rl_bonus(t_obj_b *game, int x, int y)
+void	move_enemy_rl_bonus(t_obj_b *game, int x, int y)
 {
-	int new_x = x;
-	int new_y = y + (game->enemy_dir == 1 ? 1 : -1);
+	int	new_x;
+	int	new_y;
+
+	if (game->enemy_dir == 1)
+		game->enemy_dir = 1;
+	else
+		game->enemy_dir = -1;
+	(1) && (new_x = x, new_y = y + game->enemy_dir);
 	if (game->map[new_x][new_y] == 'P')
 		lose_game_bonus(game);
-	if (game->map[new_x][new_y] == '1' || game->map[new_x][new_y] == 'C' || game->map[new_x][new_y] == 'E')
+	if (game->map[new_x][new_y] == '1' || game->map[new_x][new_y] == 'C'
+		|| game->map[new_x][new_y] == 'E')
 	{
 		if (game->enemy_dir == 1)
 			game->enemy_dir = -1;
 		else
 			game->enemy_dir = 1;
 		game->move_deley = 0;
-		return;
+		return ;
 	}
 	game->map[x][y] = '0';
 	game->map[new_x][new_y] = 'M';
@@ -61,16 +67,16 @@ void move_enemy_rl_bonus(t_obj_b *game, int x, int y)
 	draw_map_bonus(game->map, game);
 }
 
-void enemy_bonus(t_obj_b *game)
+void	enemy_bonus(t_obj_b *game)
 {
-	int i;
-	int j;
+	int			i;
+	int			j;
+	static int	frame_count;
 
 	i = 0;
-	static int frame_count = 0;
 	frame_count++;
 	if (frame_count < 30)
-		return;
+		return ;
 	frame_count = 0;
 	while (i < game->len_line)
 	{
@@ -89,10 +95,10 @@ void enemy_bonus(t_obj_b *game)
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_obj_b *game;
-	int fd_map;
+	t_obj_b	*game;
+	int		fd_map;
 
 	game = NULL;
 	fd_map = 0;

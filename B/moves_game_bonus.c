@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 04:47:59 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 21:17:40 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	draw_map_2_bonus(char **map, int i, int j, t_obj_b *game)
 
 void	draw_map_bonus(char **map, t_obj_b *game)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*move_count;
 
 	i = -1;
 	while (++i < game->len_line)
 	{
-		char *move_count = ft_itoa(game->move);
+		move_count = ft_itoa(game->move);
 		mlx_string_put(game->mlx, game->win, 20, 20, 0xFFFFFF, move_count);
 		free(move_count);
 		j = 0;
@@ -57,72 +58,54 @@ void	draw_map_bonus(char **map, t_obj_b *game)
 		}
 	}
 }
-void lose_game_bonus(t_obj_b *game)
+
+void	lose_game_bonus(t_obj_b *game)
 {
 	ft_printf("You Are Lose The Game !!");
 	exit_game_bonus(game);
 }
 
-void move_player_bonus(t_obj_b *game, int dx, int dy)
+void	move_player_bonus(t_obj_b *game, int dx, int dy)
 {
-    int  new_x;
-    int  new_y;
+	int	new_x;
+	int	new_y;
 
 	enemy_bonus(game);
-    new_x = game->player_x + dx;
-    new_y = game->player_y + dy;
-    if (game->map[new_x][new_y] == 'E' && game->candyw == game->o_coin)
-    {
-        game->map[game->player_x][game->player_y] = '0';
-        draw_map_bonus(game->map, game);
-        ft_printf("You win!\n");
+	new_x = game->player_x + dx;
+	new_y = game->player_y + dy;
+	if (game->map[new_x][new_y] == 'E' && game->candyw == game->o_coin)
+	{
+		game->map[game->player_x][game->player_y] = '0';
+		draw_map_bonus(game->map, game);
+		ft_printf("You win!\n");
 		game->move++;
-        exit_game_bonus(game);
-    }
-    else if (game->map[new_x][new_y] != '1')
-    {
-        if (game->map[new_x][new_y] == 'C')
-            game->candyw++;
+		exit_game_bonus(game);
+	}
+	else if (game->map[new_x][new_y] != '1')
+	{
+		if (game->map[new_x][new_y] == 'C')
+			game->candyw++;
 		if (game->map[new_x][new_y] == 'M')
 			lose_game_bonus(game);
-        game->map[game->player_x][game->player_y] = '0';
-        game->player_x = new_x;
-        game->player_y = new_y;
-        game->map[new_x][new_y] = 'P';
-		game->move++;
-        draw_map_bonus(game->map, game);
-    }
-}
-
-int animate_exit_bonus(t_obj_b *game)
-{
-    static int frame_counter = 0;
-    static int frame_index = 0;
-
-    if (frame_index >= 4)
-        return (0);
-    if (frame_counter++ > 10)
-    {
-        game->framee = frame_index;
-        frame_index++;
-        frame_counter = 0;
-        draw_map_bonus(game->map, game);
-    }
-    return (0);
+		game->map[game->player_x][game->player_y] = '0';
+		(1) && (game->player_x = new_x, game->player_y = new_y);
+		(1) && (game->map[new_x][new_y] = 'P', game->move++);
+		draw_map_bonus(game->map, game);
+	}
 }
 
 int	key_hook_bonus(int keycode, t_obj_b *game)
 {
-	if (keycode == KEY_UP)
+	if (keycode == KEY_UP || keycode == KEY_W)
 		move_player_bonus(game, -1, 0);
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT || keycode == KEY_A)
 	{
 		game->flag = 0;
 		move_player_bonus(game, 0, -1);
 	}
-	else if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN || keycode == KEY_S)
 		move_player_bonus(game, 1, 0);
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT || keycode == KEY_D)
 	{
 		game->flag = 1;
 		move_player_bonus(game, 0, 1);
