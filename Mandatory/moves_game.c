@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/14 22:15:59 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/15 21:55:16 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,14 @@ void	move_player(t_obj *game, int dx, int dy)
 	r = game;
 	new_x = r->player_x + dx;
 	new_y = r->player_y + dy;
-	if (r->map[new_x][new_y] != '1' && r->map[new_x][new_y] != 'E')
+	if (r->map[new_x][new_y] == 'E' && game->candyw == r->o_coin)
+	{
+		r->map[r->player_x][r->player_y] = '0';
+		ft_printf("Move: %d\n", ++game->move);
+		ft_printf("You win!\n");
+		exit_game(r);
+	}
+	else if (r->map[new_x][new_y] != '1')
 	{
 		if (r->map[new_x][new_y] == 'C')
 			game->candyw++;
@@ -71,13 +78,6 @@ void	move_player(t_obj *game, int dx, int dy)
 		r->player_y = new_y;
 		r->map[new_x][new_y] = 'P';
 		ft_printf("Move: %d\n", ++game->move);
-	}
-	else if (r->map[new_x][new_y] == 'E' && game->candyw == r->o_coin)
-	{
-		r->map[r->player_x][r->player_y] = '0';
-		ft_printf("Move: %d\n", ++game->move);
-		ft_printf("You win!\n");
-		exit_game(r);
 	}
 }
 
