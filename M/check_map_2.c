@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:27:43 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 05:50:48 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/17 00:01:20 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,5 @@ void	check_map_copy(char **c_map)
 
 int	close_window(void)
 {
-	ft_printf("Window is Closed !!");
-	exit(EXIT_SUCCESS);
+	exit(1);
 }

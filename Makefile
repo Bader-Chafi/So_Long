@@ -22,7 +22,7 @@ SOURCES_B = \
 	B/check_map_2_bonus.c \
 	B/maping_function_bonus.c \
 	utils/ft_printf.c \
-	utils/ft_itoi.c \
+	utils/ft_itoa.c \
 	utils/get_next_line.c \
 	utils/ft_printf_utils.c \
 	utils/get_next_line_utils.c
@@ -35,7 +35,7 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	cc $(CFLAGS) $(OBJECTS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o: %.c bonus/so_long_bonus.h Mandatory/so_long.h
+%.o: %.c B/so_long_bonus.h M/so_long.h
 	cc $(CFLAGS) -c $< -o $@
 
 bonus : $(NAME) $(BONUS)

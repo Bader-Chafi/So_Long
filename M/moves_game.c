@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 08:48:42 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/17 00:01:32 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int	key_hook(int keycode, t_obj *game)
 	}
 	else if (keycode == KEY_ESC)
 	{
-		ft_printf("You Pressed ESC To Exit Game\n");
-		exit_game(game);
+		free_game(game);
+		exit(1);
 	}
 	win_game(game);
 	return (0);

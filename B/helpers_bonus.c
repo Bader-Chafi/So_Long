@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 07:31:22 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/17 00:17:17 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	initialise_struct_bonus(t_obj_b *game)
 			"SO LONG ** Take all Collect then exit from the door **");
 	game->floor = mlx_xpm_file_to_image(game->mlx, "B/XPM/back.xpm", &s, &s);
 	game->wall[0] = mlx_xpm_file_to_image(game->mlx,
-			"B/XPM/wallBP.xpm", &s, &s);
+			"B/XPM/wallB.xpm", &s, &s);
 	game->wall[1] = mlx_xpm_file_to_image(game->mlx, "B/XPM/wall.xpm", &s, &s);
 	game->candy = mlx_xpm_file_to_image(game->mlx,
 			"B/XPM/meatB.xpm", &s, &s);

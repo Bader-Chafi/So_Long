@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:03:03 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 08:46:11 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/17 00:05:11 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_W 13
-# define KEY_A 12
+# define KEY_A 0
 
 int		ft_putchr(int c);
 int		ft_putstr(const char *str);

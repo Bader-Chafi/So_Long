@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:54:40 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 08:47:27 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 23:40:16 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_puterror_bonus(t_obj_b *this, char *s)
 	while (this->map[i])
 		free(this->map[i++]);
 	free(this->map);
-	free(this);
 	ft_printf("Error\n%s", s);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 06:58:06 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 21:17:40 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 23:43:46 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,7 @@ int	key_hook_bonus(int keycode, t_obj_b *game)
 		move_player_bonus(game, 0, 1);
 	}
 	else if (keycode == KEY_ESC)
-	{
-		ft_printf("You pressed ESC To Exit !!\n");
-		exit_game_bonus(game);
-	}
+		exit(1);
 	anime_bonus(game);
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoi.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 22:28:25 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 06:17:04 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/16 22:10:00 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 static int	get_len(int nbr)
 {
 	int	len;
-    len = 0;
-    if (nbr < 0)
-    {
-        nbr *= -1;
-        len += 1;
-    }
-	while (nbr)
+
+	len = 1;
+	if (nbr < 0)
+	{
+		nbr = -nbr;
+		len++;
+	}
+	while (nbr >= 10)
 	{
 		nbr /= 10;
 		len++;
@@ -46,12 +47,12 @@ char	*ft_itoa(int nbr)
 		str[0] = '-';
 		num = -num;
 	}
-	if (num == 0)
-		str[0] = '0';
-	while (num > 0)
+	while (--len >= 0)
 	{
-		str[--len] = (num % 10) + '0';
+		str[len] = (num % 10) + '0';
 		num /= 10;
+		if (len == 0 && str[0] == '-')
+			break ;
 	}
 	return (str);
 }
