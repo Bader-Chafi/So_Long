@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:54:40 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 23:43:56 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/17 02:20:54 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ t_obj	*get_map(int fd, t_obj *g, char *fds)
 
 	(1) && (i = 0, map = get_next_line(fd));
 	if (!map)
+	{
+		close(fd);
 		ft_error("** the map is empty **");
+	}
 	while (map)
 		(1) && (free(map), i++, map = get_next_line(fd));
 	s_map = (char **)malloc(sizeof(char *) * (i + 1));
@@ -43,10 +46,7 @@ t_obj	*get_map(int fd, t_obj *g, char *fds)
 		return (free(s_map), free(g), NULL);
 	map = get_next_line(fd);
 	while (map)
-	{
-		s_map[i++] = map;
-		map = get_next_line(fd);
-	}
+		(1) && (s_map[i++] = map, map = get_next_line(fd));
 	(1) && (s_map[i] = NULL, g->map = s_map, g->len_line = i);
 	return (close(fd), g);
 }

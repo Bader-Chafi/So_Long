@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 16:11:33 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 21:27:46 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/17 02:31:12 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,17 @@ void	enemy_bonus(t_obj_b *game)
 	}
 }
 
+void f()
+{
+	system("leaks so_long_bonus");
+}
+
 int	main(int ac, char **av)
 {
 	t_obj_b	*game;
 	int		fd_map;
 
+	atexit(f);
 	game = NULL;
 	fd_map = 0;
 	game = ft_half_main_bonus(game, av, fd_map, ac);

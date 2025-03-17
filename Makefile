@@ -49,4 +49,4 @@ clean:
 fclean: clean
 	rm -rf $(NAME) $(BONUS)
 
-re: all bonus clean
+re: fclean all
