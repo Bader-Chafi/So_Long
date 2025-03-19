@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/17 00:17:17 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/18 21:58:22 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,16 @@ t_obj_b	*ft_half_main_bonus(t_obj_b *game, char **av, int fd_map, int ac)
 		exit(1);
 	fd_map = check_arg_map_bonus(av[1]);
 	if (fd_map < 0)
-		return (NULL);
+		return (free(game), NULL);
 	game = get_map_bonus(fd_map, game, av[1]);
 	if (!game)
-		return (free(game), NULL);
+		return (NULL);
 	check_map_bonus(game);
 	game->map_copy = copy_map_bonus(game);
 	if (!game->map_copy)
 		return (free_game_bonus(game), NULL);
 	flood_fill_bonus(game, game->player_x, game->player_y);
 	check_map_copy_bonus(game->map_copy);
+	game->map[game->exit_x][game->exit_y] = '0';
 	return (game);
 }

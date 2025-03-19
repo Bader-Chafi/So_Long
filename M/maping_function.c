@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 01:54:40 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/17 02:20:54 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/19 00:09:42 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	check_rectongle_map(t_obj *this)
 	{
 		if (map[i][j] != '1')
 			ft_puterror(this, "**the map is not cyrcel by the wall");
-		if (map[i][j + 1] == '\n' && !map[i][j + 1] && this->size_line)
+		if ((map[i][j + 1] == '\n' || !map[i][j + 1]) && this->size_line)
 			(1) && (j = 0, i = 0, this->size_line = 0);
 		j++;
 	}

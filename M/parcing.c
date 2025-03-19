@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 08:00:23 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 05:50:59 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/18 23:44:29 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,20 @@ int	check_arg_map(char *av)
 	int	len;
 	int	fd;
 
-	fd = open(av, O_RDONLY, 666);
+	fd = open(av, O_RDWR, 666);
 	if (fd < 0)
+	{
+		close(fd);
 		ft_error("**the file is not exist.**");
+	}
 	len = ft_strlen(av);
 	if (len < 4)
 		return (-1);
 	if (ft_strcmp(av + len - 4, ".ber"))
+	{
+		close(fd);
 		ft_error("**the file is not final with .ber.**");
+	}
 	return (fd);
 }
 

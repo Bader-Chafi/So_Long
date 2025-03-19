@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:37:46 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/16 06:29:52 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/18 21:50:06 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_obj	*ft_half_main(t_obj *game, char **av, int fd_map, int ac)
 		exit(1);
 	fd_map = check_arg_map(av[1]);
 	if (fd_map < 0)
-		return (NULL);
+		return (free(game), NULL);
 	game = get_map(fd_map, game, av[1]);
 	if (!game)
 		return (free(game), NULL);
@@ -95,5 +95,6 @@ t_obj	*ft_half_main(t_obj *game, char **av, int fd_map, int ac)
 		return (free_game(game), NULL);
 	flood_fill(game, game->player_x, game->player_y);
 	check_map_copy(game->map_copy);
+	game->map[game->exit_x][game->exit_y] = '0';
 	return (game);
 }

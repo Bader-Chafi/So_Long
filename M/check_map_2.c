@@ -6,7 +6,7 @@
 /*   By: bchafi <bchafi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 04:27:43 by bchafi            #+#    #+#             */
-/*   Updated: 2025/03/17 00:01:20 by bchafi           ###   ########.fr       */
+/*   Updated: 2025/03/19 00:32:23 by bchafi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_char_2(char **map, t_obj *game, int i, int j)
 		game->o_coin += 1;
 	if (map[i][j] == 'E')
 		(1) && (game->o_exit += 1, game->exit_x = i,
-			game->exit_y = j, map[i][j] = '0');
+			game->exit_y = j);
 }
 
 void	check_caracters(t_obj *game)
@@ -52,10 +52,11 @@ t_obj	*check_map(t_obj *game)
 	i = 0;
 	check_rectongle_map(game);
 	map = game->map;
+	game->size_line = ft_strlenmap(*game->map);
 	while (map[i])
 	{
-		if (map[i][game->size_line - 1] &&
-			map[i][game->size_line - 1] != '1')
+		if (map[i][game->size_line - 1]
+			&& map[i][game->size_line - 1] != '1')
 			ft_puterror(game, "**the map is not cyrcel by the wall.**");
 		i++;
 	}
